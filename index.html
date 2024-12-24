@@ -1,147 +1,548 @@
-﻿<!DOCTYPE html>
+
+<!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-    <meta charset="UTF-8">
+    <eta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>צלמת ועורכת וידאו מקצועית</title>
+    <title>שירותי צילום ועריכה</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            font-family: 'Heebo', sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
-            color: #333;
+        @font-face {
+            font-family: 'FbSingulariHeb-Light';
+            src: url('imagesGili\\FbSingulariHeb-Light.otf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
         }
 
-        header, main, footer {
-            padding: 20px;
-            max-width: 800px;
+        @font-face {
+            font-family: 'FbSingulariHeb-Medium';
+            src: url('imagesGili\\FbSingulariHeb-Light.otf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'FbSingulariHeb-Light', sans-serif;
+        }
+
+        .header {
+            background-color: #D68F29;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            height: 80px; /* Reduced to half */
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+            padding: 0 7cm;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+        }
+
+            .nav a {
+                text-decoration: none;
+                margin: 0 40px;
+                color: #082440;
+            }
+
+        .logo img {
+            height: 70px;
+        }
+
+        .logo {
+            order: 2;
+        }
+
+        .main-image {
+            position: relative;
+            height: calc(100vh - 80px); /* Subtract header height */
+            background-image: url(imagesGili\\firstimage.jpg);
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .services {
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .photo-services {
+            background-color: #082440;
+            color: #D68F29;
+        }
+
+        .edit-services {
+            background-color: white;
+            color: #082440;
+        }
+
+        .moving-icons-container {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            margin: 50px 0;
+        }
+
+        .moving-icons {
+            display: flex;
+            justify-content: space-around;
+            position: absolute;
+            left: 0;
+            width: 100%; /* הכפלת הרוחב כדי להכיל את כל האיקונים */
+        }
+
+        .icon {
+            height: 200px;
+        }
+
+        @keyframes moveIcons {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%); /* נע חצי מהרוחב */
+            }
+        }
+
+        .portfolio {
+            background-color: #D68F29;
+            color: #082440;
+            padding: 50px 1px 50px 0;
+            text-align: center;
+        }
+
+        .portfolio-images {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+            .portfolio-images img {
+                width: 200px;
+                height: 200px;
+                object-fit: cover;
+            }
+
+        .portfolio-videos {
+            display: flex;
+            justify-content: flex-start; /* שינוי מ-space-between ל-flex-start */
+            margin-top: 50px;
+            width: 100%;
+            gap: 0;
+        }
+
+        .portfolio-video {
+            width: 50%; /* שינוי קל ברוחב כדי להבטיח שהסרטונים ממלאים בדיוק את הרוחב */
+            padding: 0;
+            box-sizing: border-box; /* מוסיף את זה כדי להבטיח שהרוחב כולל את הפדינג */
+        }
+
+            .portfolio-video video {
+                width: 100%;
+                height: auto;
+                display: block;
+                vertical-align: bottom; /* מוסיף את זה כדי למנוע רווחים קטנים בתחתית */
+            }
+
+        .equipment-rental {
+            background-color: #D68F29;
+            color: #082440;
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .equipment-items {
+            display: flex;
+            justify-content: space-evenly;
+            margin: 50px 100px 0px 100px;
+        }
+
+        #equipment-items {
+            display: flex;
+            justify-content: space-evenly;
+            margin: 120px 100px 55px 100px;
+        }
+
+        .equipment-item {
+            width: 150px;
+        }
+
+            .equipment-item video {
+                width: 200px;
+                height: 200px;
+                object-fit: cover;
+            }
+            .equipment-item img {
+                width: 200px;
+                height: 200px;
+                object-fit: cover;
+            }
+
+        .ai-images {
+            background-color: white;
+            color: #082440;
+            text-align: center;
+        }
+
+            .ai-images img {
+                max-width: 80%;
+                height: auto;
+            }
+
+        .catalog-button {
+            background-color: #D68F29;
+            color: #082440;
+            padding: 10px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            display: block;
+            margin: 20px auto;
+            width: 200px;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .about-me {
+            background-color: #082440;
+            color: #D68F29;
+            padding: 60px 0;
+            text-align: center;
+            margin: 50px 0px;
+        }
+
+        .about-content-img {
+            width: 80%;
+        }
+
+        .about-content {
+            background-color: white;
+            color: black;
+            max-width: 65%;
+            margin: 30px auto;
+            padding: 100px;
+            border-radius: 10px;
+        }
+
+        .contact {
+            background-color: white;
+            text-align: center;
+            color: #D68F29;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .contact-logo {
+            width: 100%;
+            height: auto;
+            display: block; /* Remove any potential inline spacing */
+        }
+
+        .contact-form {
             margin: 0 auto;
         }
 
-        header {
-            background-color: #4a90e2;
-            color: white;
-            text-align: center;
-            padding: 40px 20px;
-            border-radius: 0 0 20px 20px;
-        }
-
-        h1, h2 {
-            color: #4a90e2;
-        }
-
-        .slideshow-container {
-            position: relative;
-            max-width: 800px;
-            margin: auto;
-            overflow: hidden;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-
-        .slideshow-image {
+        .images-Logo {
             width: 100%;
-            height: 400px;
-            object-fit: cover;
-            display: none;
-        }
-
-        .active {
-            display: block;
-        }
-
-        form {
             display: flex;
-            flex-direction: column;
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            justify-content: space-between;
+            margin: 10px 0px;
         }
 
-        input, textarea {
-            margin-bottom: 10px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-
-        button {
-            background-color: #4a90e2;
-            color: white;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-            button:hover {
-                background-color: #357abd;
+            .images-Logo img {
+                width: 15%;
             }
-
-        .services {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }
     </style>
 </head>
 <body>
-    <header>
-        <h1>ברוכים הבאים לסטודיו שלי</h1>
-        <p>צילום ועריכת וידאו באיכות מקצועית</p>
-    </header>
+    <div class="page-wrapper">
+        <header class="header">
+            <div class="header-content">
+                <nav class="nav">
+                    <a href="#home">ראשי</a>
+                    <a href="#photo-services">שירותי צילום</a>
+                    <a href="#edit-services">שירותי עריכה</a>
+                    <a href="#portfolio">תיק עבודות</a>
+                    <a href="#equipment-rental">השכרת ציוד</a>
+                    <a href="#ai-images">תמונות AI</a>
+                    <a href="#about-me">קצת עלי</a>
+                    <a href="#contact">צור קשר</a>
+                </nav>
+                <div class="logo">
+                    <img src="imagesGili\roundLogo.png" alt="לוגו">
+                </div>
+            </div>
+        </header>
 
-    <main>
-        <div class="slideshow-container">
-            <img class="slideshow-image active" src="images/fullscreen.jpg" alt="תמונת גלריה 1">
-            <img class="slideshow-image" src="images/pic2.jpg" alt="תמונת גלריה 2">
-            <img class="slideshow-image" src="images/pic3.jpg" alt="תמונת גלריה 3">
-            <img class="slideshow-image" src="images/pic4.jpg" alt="תמונת גלריה 4">
-            <img class="slideshow-image" src="images/pic5.jpg" alt="תמונת גלריה 5">
-        </div>
+        <main>
+            <section id="home" class="main-image">
+            </section>
 
-        <h2>על העבודה שלי</h2>
-        <p>אני מתמחה בצילום ועריכת וידאו ברמה הגבוהה ביותר. עם ניסיון של שנים בתחום, אני מביאה לכל פרויקט את הכישרון והיצירתיות שלי.</p>
+            <div class="page-separator"></div>
 
-        <div class="services">
-            <h2>השירותים שלי</h2>
-            <ul>
-                <li>צילום אירועים</li>
-                <li>צילומי סטודיו</li>
-                <li>עריכת וידאו מקצועית</li>
-                <li>צילומי תדמית לעסקים</li>
-            </ul>
-        </div>
+            <section id="photo-services" class="services photo-services">
+                <h2>שירותי צילום</h2>
+                <div class="moving-icons-container">
+                    <div class="moving-icons">
+                        <img src="imagesGili/icon1.png" class="icon">
+                        <img src="imagesGili/icon2.png" class="icon">
+                        <img src="imagesGili/icon3.png" class="icon">
+                        <img src="imagesGili/icon4.png" class="icon">
+                        <img src="imagesGili/icon5.png" class="icon">
+                    </div>
+                </div>
+            </section>
 
-        <h2>צור קשר</h2>
-        <iframe src="https://forms.fillout.com/t/o3f7yzP9MGus" width="100%" height="700px" frameborder="0"></iframe>
+            <section id="edit-services" class="services edit-services">
+                <h2>שירותי עריכה</h2>
+                <div class="moving-icons-container">
+                    <div class="moving-icons">
+                        <img src="imagesGili/icon6.png" class="icon">
+                        <img src="imagesGili/icon7.png" class="icon">
+                        <img src="imagesGili/icon8.png" class="icon">
+                        <img src="imagesGili/icon9.png" class="icon">
+                        <img src="imagesGili/icon10.png" class="icon">
+                    </div>
+                </div>
+            </section>
 
-    </main>
+            <div class="page-separator"></div>
 
-    <footer>
-        <p>© 2024 כל הזכויות שמורות לסטודיו שלי</p>
-    </footer>
+            <section id="portfolio" class="portfolio">
+                <h2>תיק עבודות</h2>
+                <div class="portfolio-videos">
+                    <div class="portfolio-video">
+                        <video controls>
+                            <source src="imagesGili\video2.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="portfolio-video">
+                        <video controls>
+                            <source src="imagesGili\video3.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+                <div class="portfolio-videos">
+                    <div class="portfolio-video">
+                        <video controls>
+                            <source src="imagesGili\video1.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="portfolio-video">
+                        <video controls>
+                            <source src="imagesGili\video1.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+            </section>
+
+            <section id="equipment-rental" class="equipment-rental">
+                <h2>השכרת ציוד</h2>
+                <div class="equipment-items">
+                    <div class="equipment-item">
+                        <p>מצלמת GOPRO</p>
+                        <div class="videoContainer">
+                            <video class="myVideo">
+                                <source src="imagesGili\ziud1.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                    <div class="equipment-item">
+                        <p>סטנד</p>
+                        <div class="videoContainer">
+                            <video class="myVideo">
+                                <source src="imagesGili\ziud2.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                    <div class="equipment-item">
+                        <p>מסך ירוק 6*3 מ'</p>
+                        <div class="videoContainer">
+                            <video class="myVideo">
+                                <source src="imagesGili\ziud3.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                    <div class="equipment-item">
+                        <p>מסך שחור 4*3 מ'</p>
+                        <div class="videoContainer">
+                            <video class="myVideo">
+                                <source src="imagesGili\ziud4.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                    <div class="equipment-item">
+                        <p>תאורה 4.5*30 ס"מ"</p>
+                        <div class="videoContainer">
+                            <video class="myVideo">
+                                <source src="imagesGili\ziud5.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                </div>
+                <div id="equipment-items" class="equipment-items">
+                    <div class="equipment-item">
+                        <p>מגן מים GOPRO</p>
+                        <img src="imagesGili\ziud6.jpg" alt="ציוד 5">
+                    </div>
+                    <div class="equipment-item">
+                        <p>סלידת מכונית</p>
+                        <div class="videoContainer">
+                            <video class="myVideo">
+                                <source src="imagesGili\ziud7.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                    <div class="equipment-item">
+                        <p>תאורה 25*17</p>
+                        <img src="imagesGili\ziud8.jpg" alt="ציוד 5">
+                    </div>
+                    <div class="equipment-item">
+                        <p>חצובה למצלמה</p>
+                        <img src="imagesGili\ziud9.jpg" alt="ציוד 4">
+                    </div>
+                    <div class="equipment-item">
+                        <p>נק סנהייזר</p>
+                        <img src="imagesGili\ziud10.jpg" alt="ציוד 5">
+                    </div>
+                </div>
+            </section>
+
+
+            <div class="page-separator"></div>
+
+            <section id="ai-images" class="ai-images">
+                <h2>תמונות AI</h2>
+                <img src="imagesGili/ImageAI.jpg" alt="תמונת AI">
+                <a href="#contact" class="catalog-button">לקטלוג תמונות AI</a>
+            </section>
+
+            <section id="about-me" class="about-me">
+                <h2>קצת עלי</h2>
+                <div class="about-content">
+                    <img class="about-content-img" src="imagesGili/aboutMe.png" alt="About Me">
+                </div>
+            </section>
+
+            <div class="page-separator"></div>
+
+            <section id="contact" class="contact">
+                <h2>צור קשר</h2>
+                <iframe id="filloutForm" src="https://forms.fillout.com/t/o3f7yzP9MGus" width="100%" height="500px" frameborder="0"></iframe>
+                <div class="images-Logo">
+                    <img src="imagesGili/logoW.png" alt="images LogoW">
+                    <img src="imagesGili/logo.png" alt="images Logo">
+                </div>
+                <p>© 2024 כל הזכויות שמורות </p>
+            </section>
+            <footer>
+            </footer>
+        </main>
+    </div>
+    <script>
+        const videos = document.querySelectorAll('.myVideo');
+        const containers = document.querySelectorAll('.videoContainer');
+
+        containers.forEach((container, index) => {
+            container.addEventListener('mouseenter', () => {
+                videos[index].play(); // הפעלת הווידאו המתאים
+            });
+
+            container.addEventListener('mouseleave', () => {
+                videos[index].pause(); // השהיית הווידאו המתאים
+            });
+        });
+
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // מצא את הכפתור ואת ה-iframe
+            const activateButton = document.querySelector('.catalog-button');
+            const iframe = document.getElementById('filloutForm');
+
+            // בדוק אם הכפתור וה-iframe קיימים
+            if (activateButton && iframe) {
+                // המתן שה-iframe יטען
+                iframe.onload = function () {
+                    // הוסף אירוע לקלקל על הכפתור
+                    activateButton.addEventListener('click', function () {
+                        // שלח הודעה ל-iframe
+                        if (iframe.contentWindow) {
+                            iframe.contentWindow.postMessage({
+                                type: 'FILLOUT_CHECKBOX_CLICK',
+                                formId: 'o3f7yzP9MGus'
+                            }, 'https://forms.fillout.com'); // ודא שהדומיין נכון
+                        }
+                    });
+                };
+            } else {
+                console.error('לא נמצא הכפתור או ה-iframe');
+            }
+        });
+
+        // האזנה להודעות מ-iframe
+        window.addEventListener('message', function (event) {
+            // בדוק אם ההודעה הגיעה מהדומיין הנכון
+            if (event.origin === 'https://forms.fillout.com') {
+                console.log('התקבלה הודעה מהטופס:', event.data);
+                // כאן תוכל להוסיף קוד שיבצע פעולה על פי ההודעה אם יש צורך
+            } else {
+                console.warn('הודעה התקבלה מדומיין לא מוכר:', event.origin);
+            }
+        });
+    </script>
 
     <script>
-        let slideIndex = 0;
-        showSlides();
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    const headerOffset = 80; // Height of the header
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
-        function showSlides() {
-            let slides = document.getElementsByClassName("slideshow-image");
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].classList.remove("active");
-            }
-            slideIndex++;
-            if (slideIndex > slides.length) { slideIndex = 1 }
-            slides[slideIndex - 1].classList.add("active");
-            setTimeout(showSlides, 5000); // Change image every 5 seconds
-        }
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+                }
+            });
+        });
+
+        // Add click-to-play functionality for videos
+        document.querySelectorAll('.portfolio-video video').forEach(video => {
+            video.addEventListener('click', function () {
+                if (this.paused) {
+                    this.play();
+                } else {
+                    this.pause();
+                }
+            });
+        });
     </script>
 </body>
 </html>
